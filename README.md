@@ -1,83 +1,72 @@
-# 📈 PRB222 — Calcul de Sensibilités (Grecques) par Monte Carlo
+# Greeks Computation via Monte Carlo — Black-Scholes
 
-Projet numérique du cours **PRB222** portant sur le calcul des grecques d'options vanilles et d'options sur panier dans le modèle de Black-Scholes, via deux méthodes Monte Carlo.
+> 🎓 **Academic project** — Course PRB222, Financial Mathematics
 
----
-
-## 🎯 Objectif
-
-Calculer et comparer les sensibilités **Δ (Delta), Γ (Gamma) et Vega** par :
-- **Différences finies** : `dP/dλ ≈ (P(λ+ε) − P(λ−ε)) / 2ε`
-- **Méthode trajectorielle** : dérivation sous l'espérance
-
-Avec réduction de variance par **variables antithétiques**.
+Numerical computation of option sensitivities (**Greeks**) for vanilla and basket options in the Black-Scholes model, using two Monte Carlo methods.
 
 ---
 
-## 📂 Structure
+## Methods
 
-```
-├── greques_commented.py   # Script principal commenté
-└── figures/               # Graphiques générés (PDF)
-    ├── fig_q6_*.pdf        # Convergence des 4 estimateurs (vanille)
-    ├── fig_q7_*.pdf        # Grecques en fonction de S0
-    ├── fig_q9_*.pdf        # Convergence grecques panier
-    ├── fig_q10_*.pdf       # Grecques en fonction de S1,0
-    ├── fig_q11_*.pdf       # Grecques en fonction de K
-    └── fig_q12_*.pdf       # Grecques en fonction de ρ
-```
+- **Finite differences**: `dP/dλ ≈ (P(λ+ε) − P(λ−ε)) / 2ε`
+- **Pathwise differentiation**: differentiation under the expectation sign
+- **Variance reduction**: antithetic variables
 
 ---
 
-## ⚙️ Paramètres
+## Greeks computed
 
-| Paramètre | Valeur |
-|-----------|--------|
-| `S0` | 1 |
+| Greek | Definition |
+|-------|-----------|
+| Δ (Delta) | `∂P/∂S₀` |
+| Γ (Gamma) | `∂²P/∂S₀²` |
+| Vega | `∂P/∂σ` |
+
+---
+
+## Parameters
+
+| Parameter | Value |
+|-----------|-------|
+| `S₀` | 1 |
 | `K` | 1 |
-| `T` | 2 ans |
+| `T` | 2 years |
 | `r` | 0.01 |
-| `σ` (vanille) | 0.30 |
-| `σ = (σ1, σ2)` (panier) | (0.25, 0.30) |
+| `σ` (vanilla) | 0.30 |
+| `σ = (σ₁, σ₂)` (basket) | (0.25, 0.30) |
 | `α = β` | 0.5 |
 | `ρ` | 0.5 |
 
-> Les simulations utilisent uniquement des lois **Uniformes** via la méthode de Box-Muller.
+> All simulations use **Uniform random variables only** via Box-Muller transform.
 
 ---
 
-## 📋 Questions traitées
+## Topics covered
 
-| Q | Contenu |
+| Q | Content |
 |---|---------|
-| Q2 | Prix du call vanille (MC + formule B&S) |
-| Q3 | Grecques théoriques Δ, Γ, Vega |
-| Q4-5 | Estimateurs différences finies et trajectoriels |
-| Q6 | Variables antithétiques + comparaison des 4 estimateurs |
-| Q7 | Grecques en fonction de S0 ∈ [0, 2] |
-| Q8 | Grecques du call panier (méthode trajectorielle) |
-| Q9 | Convergence des estimateurs panier en fonction de N |
-| Q10 | Grecques en fonction de S1,0, comparaison B&S |
-| Q11 | Grecques en fonction de K ∈ [0, 2] |
-| Q12 | Grecques en fonction de ρ ∈ ]−1, 1[ |
-| Q13 | Parité Call-Put sur panier (analytique + MC) |
-| Q14 | Paramètres clés de la couverture Delta quotidienne |
+| Q2 | Vanilla call price (MC + Black-Scholes formula) |
+| Q3 | Theoretical Greeks Δ, Γ, Vega |
+| Q4–5 | Finite differences and pathwise estimators |
+| Q6 | Antithetic variables + comparison of 4 estimators |
+| Q7 | Greeks as a function of S₀ ∈ [0, 2] |
+| Q8 | Basket call Greeks (pathwise method) |
+| Q9 | Convergence of basket estimators vs N |
+| Q10 | Greeks vs S₁,₀, comparison with B&S |
+| Q11 | Greeks vs K ∈ [0, 2] |
+| Q12 | Greeks vs ρ ∈ ]−1, 1[ |
+| Q13 | Call-Put parity on basket (analytical + MC) |
+| Q14 | Key parameters for daily delta-hedging |
 
 ---
 
-## 🚀 Lancement
+## Run
 
 ```bash
 pip install numpy matplotlib scipy
 python greques_commented.py
 ```
 
-Les figures sont sauvegardées dans le dossier `figures/`.
+## Dependencies
 
----
-
-## 📦 Dépendances
-
-- `numpy`
-- `matplotlib`
-- `scipy`
+`numpy` · `matplotlib` · `scipy`
